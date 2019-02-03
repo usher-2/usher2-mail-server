@@ -1,0 +1,5 @@
+docker run --rm -ti -v letsencrypt:/etc/letsencrypt -v /var/log:/var/log  -v /home/work/services/.secret/cloudflare.ini:/cloudflare.ini certbot/dns-cloudflare --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini renew
+
+docker run --rm -ti -v letsencrypt:/etc/letsencrypt -v /var/log:/var/log -v /home/work/services/.secret/cloudflare.ini:/cloudflare.ini certbot/dns-cloudflare certonly --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini -d mail.451f.cc
+docker run --rm -ti -v letsencrypt:/etc/letsencrypt -v /var/log:/var/log -v /home/work/services/.secret/cloudflare.ini:/cloudflare.ini certbot/dns-cloudflare certonly --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini -d mx.451f.cc
+

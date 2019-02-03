@@ -1,0 +1,56 @@
+compatibility_level = 2
+
+#soft_bounce = no
+queue_directory = /var/spool/postfix
+command_directory = /usr/sbin
+daemon_directory = /usr/lib/postfix
+data_directory = /var/lib/postfix
+mail_owner = postfix
+#default_privs = nobody
+myhostname = mx.451f.cc
+#mydomain = domain.tld
+
+#myorigin = $myhostname
+#myorigin = $mydomain
+
+mydestination =
+
+inet_interfaces = all
+
+unknown_local_recipient_reject_code = 550
+
+mynetworks_style = host
+
+smtpd_banner = $myhostname ESMTP $mail_name
+
+syslog_name = mx
+
+#local_destination_concurrency_limit = 2
+#default_destination_concurrency_limit = 20
+
+sendmail_path = /usr/sbin/sendmail
+newaliases_path = /usr/bin/newaliases
+mailq_path = /usr/bin/mailq
+setgid_group = postdrop
+html_directory = no
+manpage_directory = /usr/share/man
+sample_directory = /etc/postfix
+readme_directory = /usr/share/doc/postfix/readme
+inet_protocols = all
+meta_directory = /etc/postfix
+shlib_directory = /usr/lib/postfix
+
+smtp_tls_security_level = may
+
+smtpd_tls_security_level = may
+smtpd_tls_cert_file=/etc/letsencrypt/live/mx.451f.cc/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/mx.451f.cc/privkey.pem
+smtpd_tls_dh1024_param_file = /etc/postfix/dh2048.pem
+smtpd_tls_dh512_param_file = /etc/postfix/dh512.pem
+smtpd_use_tls=yes
+
+virtual_mailbox_domains = vkostre.org, 451f.cc, usher2.club, localhost, $myhostname
+virtual_mailbox_maps = hash:/etc/postfix/vmailbox
+virtual_alias_maps = hash:/etc/postfix/virtual
+virtual_transport = lmtp:unix:/var/opt/socket/lmtp
+

@@ -1,0 +1,58 @@
+version: '3.3'
+
+services:
+        imap:
+                build:
+                        context: ./imap
+                container_name: imap
+                network_mode: "host"
+                volumes:
+                        - letsencrypt:/etc/letsencrypt
+                        - mbox:/srv/mail
+                        - socket:/var/opt/socket
+                        - ./imap/dovecot:/etc/dovecot
+                ports:
+                        - "110:110"
+                        - "143:143"
+                logging:
+                        driver: syslog
+                        options:
+                                tag: imap
+                restart: always
+        mx:
+                build:
+                        context: ./mx
+                container_name: mx
+                network_mode: "host"
+                volumes:
+                        - letsencrypt:/etc/letsencrypt
+                        - socket:/var/opt/socket
+                        - spool:/var/spool/postfix
+                        - /dev/log:/dev/log
+                        - ./mx/postfix:/etc/postfix
+                ports:
+                        - "25:25"
+                logging:
+                        driver: syslog
+                        options:
+                                tag: mx
+                restart: always
+
+networks:
+        apps:
+            driver: bridge
+            ipam:
+                driver: default
+                config:
+                    - subnet: 172.21.11.0/24
+volumes:
+        mbox:
+                external: true
+        letsencrypt:
+                external: true
+        socket:
+                external: true
+        spool:
+                external: true
+
+

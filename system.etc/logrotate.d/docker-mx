@@ -1,0 +1,15 @@
+/var/log/opt-services/mx.log
+/var/log/opt-services/mx-error.log
+{
+        rotate 2
+        daily
+        missingok
+        notifempty
+        compress
+        delaycompress
+        postrotate
+                invoke-rc.d rsyslog rotate > /dev/null
+        endscript
+        create 644 syslog syslog
+}
+

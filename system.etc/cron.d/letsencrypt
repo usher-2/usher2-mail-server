@@ -1,0 +1,2 @@
+12 12 * * * root flock -x -n /tmp/ledocker.lock docker run --rm -ti -v letsencrypt:/etc/letsencrypt -v /var/log:/var/log  -v /opt/services/.secret/cloudflare.ini:/cloudflare.ini certbot/dns-cloudflare --dns-cloudflare --dns-cloudflare-credentials /cloudflare.ini renew && su -l -c 'docker-compose -f /opt/services/docker-compose.yml kill -s SIGHUP imap mx' >/dev/null 2>&1
+

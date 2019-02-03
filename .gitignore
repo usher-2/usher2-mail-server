@@ -1,0 +1,16 @@
+*\~
+*.swp
+/.secret/cloudflare.ini
+/imap/dovecot/users
+/imap/dovecot/dh.pem
+/mx/postfix/dh2048.pem
+/mx/postfix/dh512.pem
+/mx/postfix/vmailbox
+/mx/postfix/virtual
+/mx/postfix/vmailbox.db
+/mx/postfix/virtual.db
+/mx/postfix/aliases
+/mx/postfix/aliases.db
+/mx/postfix/access
+/mx/postfix/access.db
+
